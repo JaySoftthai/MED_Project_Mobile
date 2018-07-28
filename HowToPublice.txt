@@ -1,0 +1,16 @@
+ionic link --pro-id 28235b48
+
+git init
+git add .
+git commit -m "2018.07.28.000: Create Project"
+git remote add origin https://github.com/JaySoftthai/MED_Project_Mobile
+git remote -v
+git push origin master
+cordova plugin add cordova-plugin-ionic --save --variable APP_ID="5dc4853f" --variable CHANNEL_NAME="Master" --variable UPDATE_METHOD="auto" 
+
+
+
+#Rebuild resources
+ionic cordova build
+ionic cordova run
+ionic cordova resources
