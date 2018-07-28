@@ -20,6 +20,7 @@ export class LoginSwitchPage {
 
   sUsername: string;
   sPassword: string;
+  sPINConfirm: string;
   sPIN: string;
   sPIN1: string;
   sPIN2: string;
@@ -27,6 +28,8 @@ export class LoginSwitchPage {
   sPIN4: string;
   sPIN5: string;
   sPIN6: string;
+  UserData: UserAccount;
+  UserAccountData: UserAccount;
   constructor(public navCtrl: NavController, public navParams: NavParams
     , public toast: ToastController
     , public popup: AlertController
@@ -41,8 +44,19 @@ export class LoginSwitchPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginSwitchPage');
 
+    console.log(this.sUsername + ':' + this.sPassword);
 
     this.usrProvider.login(this.sUsername, this.sPassword).then((res: UserAccount) => {
+      this.UserData = res;
+      console.log(this.UserData);
+
+      this.storage.ready().then(() => {
+
+        console.log('storage.ready');
+        let usr = this.storage.get('username'); // this.storage.get('username', this.UserAccountData.sUserName); 
+        this.sPINConfirm = this.storage.get('PIN');
+      });
+      // set a key/value
     });
 
   }

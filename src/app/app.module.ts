@@ -32,6 +32,7 @@ import { SetpinPage } from '../pages/setpin/setpin';
 import { ConfirmpinPage } from '../pages/confirmpin/confirmpin';
 import { ActivityAddPage } from '../pages/activity-add/activity-add';
 import { MeetingListPage } from '../pages/meeting-list/meeting-list';
+import { LoginSwitchPage } from '../pages/login-switch/login-switch';
 //Provider
 import { ApiProvider } from '../providers/api/api';
 import { UserloginProvider } from '../providers/userlogin/userlogin';
@@ -51,6 +52,7 @@ import { OmmMeetingListProvider } from '../providers/omm-meeting-list/omm-meetin
     ActivityAddPage,
     TabsPage,
     MeetingListPage
+    , LoginSwitchPage
   ],
   imports: [
     BrowserModule,
@@ -76,6 +78,7 @@ import { OmmMeetingListProvider } from '../providers/omm-meeting-list/omm-meetin
     ActivityAddPage,
     MenuPage,
     MeetingListPage
+    , LoginSwitchPage
   ],
   providers: [
     StatusBar,
