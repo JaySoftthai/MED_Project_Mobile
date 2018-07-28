@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 ///providers
 import { UserloginProvider } from '../../providers/userlogin/userlogin';
@@ -38,6 +40,7 @@ export class LoginSwitchPage {
     , public platform: Platform
     , public sqlite: SQLite
     , public storage: Storage
+    , private faio: FingerprintAIO
   ) {
   }
 
@@ -54,14 +57,31 @@ export class LoginSwitchPage {
 
         console.log('storage.ready');
         let usr = this.storage.get('username'); // this.storage.get('username', this.UserAccountData.sUserName); 
-        this.sPINConfirm = this.storage.get('PIN');
+        let PIN = this.storage.get('PIN');
       });
       // set a key/value
     });
 
   }
+  ShowFingerPrint() {
+    this.faio.show({
+      clientId: 'FingerPrintScan',
+      clientSecret: 'password', // Only Android
+      localizedFallbackTitle: 'Use Pin', // Only iOS
+      localizedReason: 'Please authenticate' // Only iOS
+    })
+      .then((result: any) => {
+        this.navCtrl.setRoot('HomePage');
+      })
+      .catch((error: any) => {
+        console.log('err: ', error);
+      });
+  }
+
+  ShowPinCode() {
 
 
+  }
 
 
 
