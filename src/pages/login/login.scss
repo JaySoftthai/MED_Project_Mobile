@@ -1,0 +1,14 @@
+page-login {
+    .login-header{
+        background-color: #32b846 !important;
+        color: #ffffff;
+    } 
+    .login-bg{
+        background-color: #e3e7ec;
+    }
+    //hide scroll
+    ::-webkit-scrollbar,
+    *::-webkit-scrollbar {
+      display: none;
+    }
+}

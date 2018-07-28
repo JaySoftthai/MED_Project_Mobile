@@ -1,0 +1,21 @@
+page-home {
+   .table.table-bordered.table-fixed.weekview-normal-event-table tr:nth-child(5)
+   {
+        background-color: #cccc;
+   }
+    .table.table-bordered.table-fixed.weekview-normal-event-table tr > td:first-child
+   {
+        border-right: 2px solid #fe6472;
+        font-size: 11px;
+   }
+    .table.table-bordered.table-fixed.weekview-normal-event-table
+   {
+        border-top: 2px solid #9ec0fe;
+   }
+   .weekview-allday-table {
+    height: 50px;
+    position: relative;
+    border-bottom: 0px solid #ddd; 
+    font-size: 14px;
+    }
+}

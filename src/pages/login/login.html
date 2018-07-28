@@ -1,0 +1,42 @@
+
+<!-- <ion-header>
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-content padding class="login-bg">
+        <form novalidate [formGroup]="myForm" >
+  <ion-grid>
+      <ion-row>
+              <ion-col col-12 style="text-align: center;">
+                  <img src="assets/imgs/logo/logo-swu.png" style="width:50%; margin: 0 auto !important;text-align: center;" >
+              </ion-col>
+           <ion-col col-12>
+            <ion-list>
+                <ion-item>
+                    <ion-label floating>Username</ion-label>
+                    <ion-input type="text" [(ngModel)]="sUsername"  formControlName="txtUsername"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label floating>Password</ion-label>
+                    <ion-input type="password" [(ngModel)]="sPassword" formControlName="txtPassword"></ion-input>
+                  </ion-item>
+              </ion-list>
+              <p>Forgot Password?<a> Click Here.</a></p>
+          </ion-col>
+      </ion-row>
+          <ion-row>
+              <ion-col col-12 style="text-align:center;">
+                  <button ion-button full round  color="primary" (click)="login()">LOGIN</button>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12 style="text-align:center;">
+                    <button ion-button full round  color="primary-dark" (click)="register()" >REGISTRATION</button>
+                  </ion-col>
+          </ion-row>
+</ion-grid>
+
+        </form>
+</ion-content>

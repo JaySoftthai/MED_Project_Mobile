@@ -1,0 +1,25 @@
+page-confirmpin {
+    .confirmpin-bg{
+        background-color: #e3e7ec;
+    }
+    .ion-row-number{
+        text-align: center;
+    }
+    .btn-number{
+        background-color: transparent;
+    }
+    .col-input-pin{
+        text-align: center;
+        padding: 0px 2px;
+    }    
+    .div-input-pin{
+        text-align: center;
+        border-bottom: 3px solid #ccc;
+        height: 30px;
+    }
+    //hide scroll
+    ::-webkit-scrollbar,
+    *::-webkit-scrollbar {
+    display: none;
+    }
+}

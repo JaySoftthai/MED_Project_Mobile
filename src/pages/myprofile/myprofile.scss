@@ -1,0 +1,10 @@
+page-myprofile {
+    //hide scroll
+    ::-webkit-scrollbar,
+    *::-webkit-scrollbar {
+      display: none;
+    }
+    .item-text{
+        color: #000000;
+    }
+}

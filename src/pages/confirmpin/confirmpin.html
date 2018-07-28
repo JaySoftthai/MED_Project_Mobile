@@ -1,0 +1,48 @@
+<ion-content padding class="confirmpin-bg">
+    <ion-grid>
+      <ion-row>
+          <ion-col col-12 style="text-align: center;">
+              <img src="assets/imgs/logo/logo-swu.png" style="width:50%; margin: 0 auto !important;text-align: center;" >
+          </ion-col>
+      </ion-row>
+      <ion-row class="ion-row-number">
+        <ion-col col-2></ion-col>
+        <ion-col col-8>ยืนยันรหัสผ่าน</ion-col>
+        <ion-col col-2></ion-col>
+      </ion-row>
+      <ion-row style="margin-bottom: 15px;margin-top: 25px;">
+          <ion-col col-2 class="col-input-pin"><div class="div-input-pin">{{sPIN1}}</div></ion-col>
+          <ion-col col-2 class="col-input-pin"><div class="div-input-pin">{{sPIN2}}</div></ion-col>
+          <ion-col col-2 class="col-input-pin"><div class="div-input-pin">{{sPIN3}}</div></ion-col>
+          <ion-col col-2 class="col-input-pin"><div class="div-input-pin">{{sPIN4}}</div></ion-col>
+          <ion-col col-2 class="col-input-pin"><div class="div-input-pin">{{sPIN5}}</div></ion-col>
+          <ion-col col-2 class="col-input-pin"><div class="div-input-pin">{{sPIN6}}</div></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 style="text-align: center;">
+            <button ion-button full round  color="primary-dark" (click)="ConfirmPIN()">CONFIRM</button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-row-number">
+        <ion-col col-4><button ion-button block outline (click)="AddNumber('1')">1</button></ion-col>
+        <ion-col col-4><button ion-button block outline (click)="AddNumber('2')">2</button></ion-col>
+        <ion-col col-4><button ion-button block outline (click)="AddNumber('3')">3</button></ion-col>
+      </ion-row>
+      <ion-row class="ion-row-number">
+        <ion-col col-4><button ion-button block outline (click)="AddNumber('4')">4</button></ion-col>
+        <ion-col col-4><button ion-button block outline (click)="AddNumber('5')">5</button></ion-col>
+        <ion-col col-4><button ion-button block outline (click)="AddNumber('6')">6</button></ion-col>
+     </ion-row>
+     <ion-row class="ion-row-number">
+        <ion-col col-4><button ion-button block outline (click)="AddNumber('7')">7</button></ion-col>
+        <ion-col col-4><button ion-button block outline (click)="AddNumber('8')">8</button></ion-col>
+        <ion-col col-4><button ion-button block outline (click)="AddNumber('9')">9</button></ion-col>
+     </ion-row>
+     <ion-row class="ion-row-number">
+        <ion-col col-4><button ion-button block icon-only (click)="Cancel()"><ion-icon name="arrow-round-back"></ion-icon></button></ion-col>
+        <ion-col col-4><button ion-button block outline (click)="AddNumber('0')">0</button></ion-col>
+        <ion-col col-4><button ion-button block icon-only (click)="DelNumber()" *ngIf="isShowBtnBackSpace"><ion-icon name="backspace"></ion-icon></button></ion-col>
+     </ion-row>
+    </ion-grid>
+  </ion-content>
+
