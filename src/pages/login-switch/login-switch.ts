@@ -103,9 +103,10 @@ export class LoginSwitchPage {
       localizedReason: 'Please authenticate' // Only iOS
     })
       .then((result: any) => {
-        this.navCtrl.setRoot('HomePage');
+        this.navCtrl.setRoot('home');
       })
       .catch((error: any) => {
+        this.presentToast(error);
         console.log('err: ', error);
       });
   }
@@ -125,7 +126,7 @@ export class LoginSwitchPage {
   presentToast(sMsg) {
     let toast = this.toast.create({
       message: sMsg,
-      duration: 3000,
+      duration: 4000,
       position: 'buttom'
     });
 

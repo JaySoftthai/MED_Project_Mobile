@@ -53,15 +53,24 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
+    // console.log('loginPage ionViewDidLoad')
+    // this.storage.set("IsLogined", false);
   }
 
   ionViewWillEnter() {
+    console.log('loginPage ionViewWillEnter')
 
     //เมื่อเข้าหน้า login ให้ตรวจสอบก่อนว่าเคย login แล้วยัง หากเคยให้ไปยังหน้า Lock screen
     this.usrProvider.isLogin().then((res: boolean) => {
       this.isLogin = res;
       console.log('page-login isLogin:' + this.isLogin);
       if (this.isLogin) {
+
+        // this.usrProvider.isLogged().then((val: boolean) => {
+        //   this.isLogin = val;
+
+        //   if (this.isLogin) { }
+        // });
         this.storage.set("IsLogined", true);
         this.navCtrl.setRoot(LoginSwitchPage);//this.navCtrl.setRoot(LockscreenPage);
         return false;
