@@ -13,6 +13,8 @@ import { UserAccount } from '../../models/UserAccount';
 
 ///Pages
 import { LockscreenPage } from '../lockscreen/lockscreen';
+import { LoginPage } from '../login/login';
+import { ConfirmpinPage } from '../confirmpin/confirmpin';
 
 @Component({
   selector: 'page-login-switch',
@@ -32,6 +34,7 @@ export class LoginSwitchPage {
   sPIN6: string;
   UserData: UserAccount;
   UserAccountData: UserAccount;
+  isLogin: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams
     , public toast: ToastController
     , public popup: AlertController
@@ -45,24 +48,53 @@ export class LoginSwitchPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginSwitchPage');
 
-    console.log(this.sUsername + ':' + this.sPassword);
 
-    this.usrProvider.login(this.sUsername, this.sPassword).then((res: UserAccount) => {
-      this.UserData = res;
-      console.log(this.UserData);
+    this.usrProvider.isLogged().then((val: boolean) => {
+      this.isLogin = val;
 
-      this.storage.ready().then(() => {
+      if (this.isLogin) {
+        this.usrProvider.getUserAccountFromLocalStorage().then((usr: UserAccount) => {
+          this.UserAccountData = usr;
+          console.log(this.UserAccountData);
+          this.sPIN = '' + this.UserAccountData.sPIN;
+          console.log(this.UserAccountData.sUserName + ' ' + this.UserAccountData.sPIN);
+        });
 
-        console.log('storage.ready');
-        let usr = this.storage.get('username'); // this.storage.get('username', this.UserAccountData.sUserName); 
-        let PIN = this.storage.get('PIN');
-      });
-      // set a key/value
+      } else {
+        this.navCtrl.setRoot(LoginPage);
+      }
     });
 
+
   }
+
+  Logout() {
+    this.storage.set('IsLogined', false);
+  }
+
+  ClearLogin() {
+
+    this.storage.ready().then(() => {
+      this.storage.get("useraccount").then((value: UserAccount) => {
+
+        //ลบออกจากฐานข้อมูล
+        if (this.platform.is('core')) {
+          this.sqlite.create({
+            name: "data.db", location: "default"
+          }).then((db: SQLiteObject) => {
+            db.executeSql("DELETE FROM T_LOGIN ", [value.sUserName])
+              .then((data) => { }, (error) => { });
+          });
+        }
+
+        let isRemoved = this.storage.remove('useraccount');
+        let isRemoved2 = this.storage.remove('username');
+      });
+
+    });
+  }
+
   ShowFingerPrint() {
     this.faio.show({
       clientId: 'FingerPrintScan',
@@ -80,9 +112,12 @@ export class LoginSwitchPage {
 
   ShowPinCode() {
 
+    console.log('ShowPinCode')
+    console.log(this.sPIN)
+    console.log(this.UserAccountData)
+    this.navCtrl.push(ConfirmpinPage, { UserAccountData: this.UserAccountData, Pin: this.sPIN }, { animate: false });
 
   }
-
 
 
 

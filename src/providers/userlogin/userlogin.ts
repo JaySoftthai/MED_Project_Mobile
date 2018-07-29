@@ -63,7 +63,10 @@ export class UserloginProvider {
         this.storage.get("username").then((value: string) => resolve(value), (reason) => reject("false"));
       });
     });
+
+
   }
+
   //Login
   login(sUserName: string, sPassword: string): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -83,6 +86,31 @@ export class UserloginProvider {
 
     });
   }
+
+  logout(): Promise<any> {
+
+    return new Promise((resolve, reject) => {
+      this.storage.ready().then(() => {
+        this.storage.get("useraccount").then((value: UserAccount) => {
+
+          //ลบออกจากฐานข้อมูล
+          if (this.platform.is('core')) {
+            this.sqlite.create({
+              name: "data.db", location: "default"
+            }).then((db: SQLiteObject) => {
+              db.executeSql("DELETE FROM T_LOGIN ", [value.sUserName])
+                .then((data) => { }, (error) => { });
+            });
+          }
+
+          let isRemoved = this.storage.remove('useraccount');
+          // console.log(resolve(isRemoved) == undefined)
+          resolve((resolve(isRemoved) == undefined));
+        }, () => reject(false));
+      });
+
+    });
+  }
   //create table login local
   CreateTableLogin(): void {
     if (this.platform.is('core')) {
@@ -94,7 +122,7 @@ export class UserloginProvider {
         })
           .then((db: SQLiteObject) => {
             //หากยังไม่มีตาราง login ก็ให้สร้างตารางใหม่ หากมีแล้วก็ไม่ต้องสร้าง
-            db.executeSql("CREATE TABLE IF NOT EXIST T_LOGIN (id INTEGER PRIMAY KEY AUTOINCREMENT, sUsername VARCHAR(20) ,sUserCode VARCHAR(11) ,sPin VARCHAR(6))", {})
+            db.executeSql("CREATE TABLE IF NOT EXIST T_LOGIN (id INTEGER PRIMAY KEY AUTOINCREMENT, sUserName VARCHAR(20) ,sUserCode VARCHAR(11) ,sPin VARCHAR(10))", {})
               .then((data) => { }, (error) => { });
           }, (error) => { });
       });
@@ -110,5 +138,29 @@ export class UserloginProvider {
     //     let sUsername = this.getUserNameFromStorage();
     //     resolve(sUsername);
     //   });
+  }
+
+
+
+  isLogged(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.storage.ready().then(() => {
+        console.log(this.storage.get("IsLogined"))
+        this.storage.get("IsLogined").then((value: boolean) => resolve(value != undefined && value != null), (reason) => reject(false));
+      });
+    });
+  }
+
+  getUserAccountFromLocalStorage(): Promise<UserAccount> {
+    return new Promise((resolve, reject) => {
+      this.storage.ready().then(() => {
+        this.storage.get("useraccount").then((value: UserAccount) => {
+          let lstUsr = value;
+          this.storage.get("PIN").then((pin_val: string) => { lstUsr.sPIN = pin_val; });
+
+          resolve(lstUsr)
+        }, (reason) => reject(false));
+      });
+    });
   }
 }

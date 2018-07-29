@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //Import Pages
 import { MeetingListPage } from '../meeting-list/meeting-list';
+import { FingerPrintPage } from '../finger-print/finger-print';
 
 
 @Component({
@@ -19,6 +20,11 @@ export class MenuPage {
   GotoPage(mode) {
 
     this.navCtrl.push(MeetingListPage);
+
+  }
+  GotoFingerPrintPage() {
+
+    this.navCtrl.push(FingerPrintPage);
 
   }
 }

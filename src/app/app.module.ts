@@ -76,8 +76,8 @@ import { OmmMeetingListProvider } from '../providers/omm-meeting-list/omm-meetin
     SetpinPage,
     ConfirmpinPage,
     ActivityAddPage,
-    MenuPage,
-    MeetingListPage
+    MenuPage
+    , MeetingListPage
     , LoginSwitchPage
   ],
   providers: [
@@ -91,8 +91,8 @@ import { OmmMeetingListProvider } from '../providers/omm-meeting-list/omm-meetin
     AppVersion,
     UserloginProvider,
     CommonProvider,
-    OmmMeetingListProvider,
-    FingerprintAIO
+    OmmMeetingListProvider
+    , FingerprintAIO
   ]
 })
 export class AppModule { }

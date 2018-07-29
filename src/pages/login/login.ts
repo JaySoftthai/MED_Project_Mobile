@@ -46,7 +46,6 @@ export class LoginPage {
     this.usrProvider.getUserNameFromStorage().then((res: string) => {
       this.sUsername1 = res;
     });
-    console.log(this.storage.ready());
     // this.storage.ready().then(() => { this.storage.set('username', "1234"); });
     this.storage.get('username').then((name) => {
       console.log('Me: Hey, ' + name + '! You have a very nice name.');
@@ -61,8 +60,9 @@ export class LoginPage {
     //เมื่อเข้าหน้า login ให้ตรวจสอบก่อนว่าเคย login แล้วยัง หากเคยให้ไปยังหน้า Lock screen
     this.usrProvider.isLogin().then((res: boolean) => {
       this.isLogin = res;
-      console.log('isLogin:' + this.isLogin);
+      console.log('page-login isLogin:' + this.isLogin);
       if (this.isLogin) {
+        this.storage.set("IsLogined", true);
         this.navCtrl.setRoot(LoginSwitchPage);//this.navCtrl.setRoot(LockscreenPage);
         return false;
       }
@@ -82,7 +82,17 @@ export class LoginPage {
           console.log("res " + res.sFirstName);
           if (res.sResult == "Success") {
             console.log(this.UserData);
-            this.navCtrl.push(SetpinPage, { UserAccountData: this.UserData }, { animate: false });
+            this.storage.set("IsLogined", true);
+            this.storage.get('PIN').then((sPinCode: string) => {
+              console.log('login storage.get PIN :' + sPinCode);
+              if (sPinCode != '' && sPinCode != undefined && sPinCode != null) {
+
+                this.navCtrl.setRoot(LoginSwitchPage);
+
+              } else {
+                this.navCtrl.push(SetpinPage, { UserAccountData: this.UserData }, { animate: false });
+              }
+            });
           }
           else {
             //แจ้งเตือนกรณี login not success
