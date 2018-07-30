@@ -94,10 +94,22 @@ export class LoginSwitchPage {
 
     });
   }
-
+  CheckFingerPrint() {
+    console.log('check');
+    this.faio.isAvailable().then(result => {
+      this.presentToast(result);
+      console.log('CheckFingerPrint:' + result);
+    }).catch(err => {
+      this.presentToast('CheckFingerPrint:' + err);
+      console.log(err);
+    });
+  }
   ShowFingerPrint() {
+    this.faio.isAvailable();
+
+    this.presentToast(this.faio.isAvailable());
     this.faio.show({
-      clientId: 'FingerPrintScan',
+      clientId: 'Fingerprint-Demo',
       clientSecret: 'password', // Only Android
       localizedFallbackTitle: 'Use Pin', // Only iOS
       localizedReason: 'Please authenticate' // Only iOS
