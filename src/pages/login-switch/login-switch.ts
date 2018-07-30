@@ -96,38 +96,29 @@ export class LoginSwitchPage {
 
     });
   }
-  CheckFingerPrint() {
-    console.log('check');
-    this.faio.isAvailable().then(result => {
-      this.presentToast(result);
-      console.log('CheckFingerPrint:' + result);
-    }).catch(err => {
-      this.presentToast('CheckFingerPrint:' + err);
-      console.log(err);
-    });
+  ShowTouchID() {
+
+    this.iTouchID.isAvailable()
+      .then(
+        res => console.log('TouchID is available!'),
+        err => console.error('TouchID is not available', err)
+      )
+      .catch((error: any) => {
+        this.presentToast(error);
+        console.log('err: ', error);
+      });
+
+    this.iTouchID.verifyFingerprint('Scan your fingerprint please')
+      .then(
+        res => console.log('Ok', res),
+        err => console.error('Error', err)
+      )
+      .catch((error: any) => {
+        this.presentToast(error);
+        console.log('err: ', error);
+      });
   }
   ShowFingerPrint() {
-    // this.iTouchID.isAvailable()
-    //   .then(
-    //     res => console.log('TouchID is available!'),
-    //     err => console.error('TouchID is not available', err)
-    //   )
-    //   .catch((error: any) => {
-    //     this.presentToast(error);
-    //     console.log('err: ', error);
-    //   });
-
-    // this.iTouchID.verifyFingerprint('Scan your fingerprint please')
-    //   .then(
-    //     res => console.log('Ok', res),
-    //     err => console.error('Error', err)
-    //   )
-    //   .catch((error: any) => {
-    //     this.presentToast(error);
-    //     console.log('err: ', error);
-    //   });
-
-
     this.faio.isAvailable().then((isVal: boolean) => {
       console.log('isAvailable succ: ', isVal);
       this.presentToastCtrl('isAvailable succ: ' + isVal, 4000, 'top');
