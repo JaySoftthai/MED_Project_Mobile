@@ -4,6 +4,7 @@ import { Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
+import { TouchID } from '@ionic-native/touch-id';
 
 ///providers
 import { UserloginProvider } from '../../providers/userlogin/userlogin';
@@ -44,6 +45,7 @@ export class LoginSwitchPage {
     , public sqlite: SQLite
     , public storage: Storage
     , private faio: FingerprintAIO
+    , private iTouchID: TouchID
   ) {
   }
 
@@ -106,7 +108,6 @@ export class LoginSwitchPage {
   }
   ShowFingerPrint() {
     this.faio.isAvailable();
-
     this.presentToast(this.faio.isAvailable());
     this.faio.show({
       clientId: 'Fingerprint-Demo',
