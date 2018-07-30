@@ -107,8 +107,12 @@ export class LoginSwitchPage {
     });
   }
   ShowFingerPrint() {
-    this.faio.isAvailable();
-    this.presentToast(this.faio.isAvailable());
+    this.faio.isAvailable().then((isVal: boolean) => {
+      console.log('isAvailable succ: ', isVal);
+    }).catch((error: any) => {
+      this.presentToast(error);
+      console.log('isAvailable err: ', error);
+    });
     this.faio.show({
       clientId: 'Fingerprint-Demo',
       clientSecret: 'password', // Only Android
