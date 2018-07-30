@@ -20,6 +20,7 @@ import { Network } from '@ionic-native/network';
 import { SQLite } from '@ionic-native/sqlite';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
+import { TouchID } from '@ionic-native/touch-id';
 
 //Page
 import { HomePage } from '../pages/home/home';
@@ -93,6 +94,7 @@ import { OmmMeetingListProvider } from '../providers/omm-meeting-list/omm-meetin
     CommonProvider,
     OmmMeetingListProvider
     , FingerprintAIO
+    , TouchID
   ]
 })
 export class AppModule { }
