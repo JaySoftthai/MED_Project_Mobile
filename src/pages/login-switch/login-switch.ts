@@ -107,6 +107,27 @@ export class LoginSwitchPage {
     });
   }
   ShowFingerPrint() {
+    this.iTouchID.isAvailable()
+      .then(
+        res => console.log('TouchID is available!'),
+        err => console.error('TouchID is not available', err)
+      )
+      .catch((error: any) => {
+        this.presentToast(error);
+        console.log('err: ', error);
+      });
+
+    this.iTouchID.verifyFingerprint('Scan your fingerprint please')
+      .then(
+        res => console.log('Ok', res),
+        err => console.error('Error', err)
+      )
+      .catch((error: any) => {
+        this.presentToast(error);
+        console.log('err: ', error);
+      });
+
+
     this.faio.isAvailable().then((isVal: boolean) => {
       console.log('isAvailable succ: ', isVal);
     }).catch((error: any) => {
@@ -145,6 +166,19 @@ export class LoginSwitchPage {
       message: sMsg,
       duration: 4000,
       position: 'buttom'
+    });
+
+    toast.onDidDismiss(() => {
+      //console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
+  presentToastCtrl(sMsg, nDuration, sPosition) {
+    let toast = this.toast.create({
+      message: sMsg,
+      duration: nDuration,
+      position: sPosition
     });
 
     toast.onDidDismiss(() => {
