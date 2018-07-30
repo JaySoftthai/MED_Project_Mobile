@@ -107,33 +107,35 @@ export class LoginSwitchPage {
     });
   }
   ShowFingerPrint() {
-    this.iTouchID.isAvailable()
-      .then(
-        res => console.log('TouchID is available!'),
-        err => console.error('TouchID is not available', err)
-      )
-      .catch((error: any) => {
-        this.presentToast(error);
-        console.log('err: ', error);
-      });
+    // this.iTouchID.isAvailable()
+    //   .then(
+    //     res => console.log('TouchID is available!'),
+    //     err => console.error('TouchID is not available', err)
+    //   )
+    //   .catch((error: any) => {
+    //     this.presentToast(error);
+    //     console.log('err: ', error);
+    //   });
 
-    this.iTouchID.verifyFingerprint('Scan your fingerprint please')
-      .then(
-        res => console.log('Ok', res),
-        err => console.error('Error', err)
-      )
-      .catch((error: any) => {
-        this.presentToast(error);
-        console.log('err: ', error);
-      });
+    // this.iTouchID.verifyFingerprint('Scan your fingerprint please')
+    //   .then(
+    //     res => console.log('Ok', res),
+    //     err => console.error('Error', err)
+    //   )
+    //   .catch((error: any) => {
+    //     this.presentToast(error);
+    //     console.log('err: ', error);
+    //   });
 
 
     this.faio.isAvailable().then((isVal: boolean) => {
       console.log('isAvailable succ: ', isVal);
+      this.presentToastCtrl('isAvailable succ: ' + isVal, 4000, 'top');
     }).catch((error: any) => {
-      this.presentToast(error);
+      this.presentToastCtrl('isAvailable err: ' + error, 4000, 'top');
       console.log('isAvailable err: ', error);
     });
+
     this.faio.show({
       clientId: 'Fingerprint-Demo',
       clientSecret: 'password', // Only Android
