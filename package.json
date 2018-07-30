@@ -75,7 +75,7 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-app-version": {},
       "cordova-plugin-fingerprint-aio": {
-        "FACEID_USAGE_DESCRIPTION": "Login now...."
+        "FACEID_USAGE_DESCRIPTION": "Scan your fingerprint"
       },
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-touchid": {},
