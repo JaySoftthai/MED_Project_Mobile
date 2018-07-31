@@ -94,7 +94,7 @@ import { OmmMeetingListProvider } from '../providers/omm-meeting-list/omm-meetin
     CommonProvider,
     OmmMeetingListProvider
     , FingerprintAIO
-    // , TouchID
+    , TouchID
   ]
 })
 export class AppModule { }

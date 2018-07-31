@@ -36,6 +36,7 @@ export class LoginSwitchPage {
   UserData: UserAccount;
   UserAccountData: UserAccount;
   isLogin: boolean;
+  touchIdAvailable: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams
     , public toast: ToastController
     , public popup: AlertController
