@@ -14,7 +14,7 @@ import { MyprofilePage } from '../myprofile/myprofile';
 })
 export class MenuPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private qrScanner: QRScanner) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private qr_Scanner: QRScanner) {
   }
 
   ionViewDidLoad() {
@@ -53,17 +53,17 @@ export class MenuPage {
   }
   CallQRScaner() {
     // Optionally request the permission early
-    this.qrScanner.prepare()
+    this.qr_Scanner.prepare()
       .then((status: QRScannerStatus) => {
         if (status.authorized) {
           // camera permission was granted
 
 
           // start scanning
-          let scanSub = this.qrScanner.scan().subscribe((text: string) => {
+          let scanSub = this.qr_Scanner.scan().subscribe((text: string) => {
             console.log('Scanned something', text);
 
-            this.qrScanner.hide(); // hide camera preview
+            this.qr_Scanner.hide(); // hide camera preview
             scanSub.unsubscribe(); // stop scanning
           });
 
