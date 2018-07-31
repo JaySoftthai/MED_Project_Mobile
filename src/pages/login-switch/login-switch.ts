@@ -101,8 +101,14 @@ export class LoginSwitchPage {
 
     this.iTouchID.isAvailable()
       .then(
-        res => console.log('TouchID is available!'),
-        err => console.error('TouchID is not available', err)
+        res => {
+          console.log('TouchID is available!')
+          this.presentToastCtrl('TouchID is available!', 4000, 'top');
+        },
+        err => {
+          console.error('TouchID is not available', err)
+          this.presentToastCtrl('TouchID is not available ' + err, 4000, 'top');
+        }
       )
       .catch((error: any) => {
         this.presentToast(error);
@@ -111,8 +117,14 @@ export class LoginSwitchPage {
 
     this.iTouchID.verifyFingerprint('Scan your fingerprint please')
       .then(
-        res => console.log('Ok', res),
-        err => console.error('Error', err)
+        res => {
+          console.log('Ok', res);
+          this.presentToast('OK:' + res);
+        },
+        err => {
+          console.error('Error:', err);
+          this.presentToast('Error:' + err);
+        }
       )
       .catch((error: any) => {
         this.presentToast(error);
@@ -148,7 +160,8 @@ export class LoginSwitchPage {
     console.log('ShowPinCode')
     console.log(this.sPIN)
     console.log(this.UserAccountData)
-    this.navCtrl.push(ConfirmpinPage, { UserAccountData: this.UserAccountData, Pin: this.sPIN }, { animate: false });
+    this.navCtrl.push(LockscreenPage);
+    // this.navCtrl.push(ConfirmpinPage, { UserAccountData: this.UserAccountData, Pin: this.sPIN }, { animate: false });
 
   }
 
