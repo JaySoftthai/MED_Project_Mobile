@@ -56,6 +56,7 @@ import { OmmMeetingListProvider } from '../providers/omm-meeting-list/omm-meetin
     TabsPage,
     MeetingListPage
     , LoginSwitchPage
+
   ],
   imports: [
     BrowserModule,
