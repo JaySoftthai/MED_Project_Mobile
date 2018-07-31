@@ -21,6 +21,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 import { TouchID } from '@ionic-native/touch-id';
+import { Camera } from '@ionic-native/camera';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
 //Page
@@ -97,7 +98,7 @@ import { OmmMeetingListProvider } from '../providers/omm-meeting-list/omm-meetin
     , FingerprintAIO
     , TouchID
     , QRScanner
-    // , QRScannerStatus
+    , Camera
   ]
 })
 export class AppModule { }
