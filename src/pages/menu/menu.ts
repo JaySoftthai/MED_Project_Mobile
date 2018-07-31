@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 //Import Pages
 import { MeetingListPage } from '../meeting-list/meeting-list';
@@ -14,7 +14,11 @@ import { MyprofilePage } from '../myprofile/myprofile';
 })
 export class MenuPage {
   QR_DATA: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private qr_Scanner: QRScanner) {
+  constructor(public navCtrl: NavController, public navParams: NavParams
+    , public toast: ToastController
+    , public popup: AlertController
+    , public loading: LoadingController
+    , private qr_Scanner: QRScanner) {
   }
 
   ionViewDidLoad() {
@@ -55,6 +59,8 @@ export class MenuPage {
     // Optionally request the permission early
     this.qr_Scanner.prepare()
       .then((status: QRScannerStatus) => {
+
+        this.presentToastCtrl(status.authorized, 6000, 'buttom');
         if (status.authorized) {
           // camera permission was granted
 
@@ -62,6 +68,8 @@ export class MenuPage {
           // start scanning
           let scanSub = this.qr_Scanner.scan().subscribe((text: string) => {
             console.log('Scanned something', text);
+            this.presentToastCtrl(text, 6000, 'top');
+
             this.QR_DATA = text;
             this.qr_Scanner.hide(); // hide camera preview
             scanSub.unsubscribe(); // stop scanning
@@ -75,7 +83,27 @@ export class MenuPage {
           // permission was denied, but not permanently. You can ask for permission again at a later time.
         }
       })
-      .catch((e: any) => { console.log('Error is', e) });
+      .catch((e: any) => {
+        this.presentToastCtrl('Error is' + e, 6000, 'buttom');
+        console.log('Error is', e)
+      });
 
   }
+
+  presentToastCtrl(sMsg, nDuration, sPosition) {
+    let toast = this.toast.create({
+      message: sMsg,
+      duration: nDuration,
+      position: sPosition
+    });
+
+    toast.onDidDismiss(() => {
+      //console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
+
+
+
 }
