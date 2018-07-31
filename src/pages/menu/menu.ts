@@ -13,7 +13,7 @@ import { MyprofilePage } from '../myprofile/myprofile';
   templateUrl: 'menu.html',
 })
 export class MenuPage {
-
+  QR_DATA: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, private qr_Scanner: QRScanner) {
   }
 
@@ -62,7 +62,7 @@ export class MenuPage {
           // start scanning
           let scanSub = this.qr_Scanner.scan().subscribe((text: string) => {
             console.log('Scanned something', text);
-
+            this.QR_DATA = text;
             this.qr_Scanner.hide(); // hide camera preview
             scanSub.unsubscribe(); // stop scanning
           });
