@@ -1,14 +1,52 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Menu</ion-title>
+    <ion-title></ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
-<ion-content padding>
-  <button ion-button full (click)="GotoPage('MeetingList')">Meeting list</button>
-  <button ion-button full (click)="GotoFingerPrintPage('FingerPrint')">
-    FingerPrint</button>
+<ion-content padding class="login-bg">
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center col-3 style="text-align: center;">&nbsp;</ion-col>
+      <ion-col text-center col-6 style="text-align: center;">
+        &nbsp;
+        <br /> &nbsp;
+      </ion-col>
+      <ion-col text-center col-3 style="text-align: center;">&nbsp;</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center col-6 style="text-align: center;">
+        <button clear item-center style="background-color: transparent;" (click)="GotoPage('SCHEDULE')">
+          <img src="assets/imgs/logo/schedule.png">
+        </button>
+      </ion-col>
+      <ion-col text-center col-6 style="text-align: center;">
+        <button clear item-center style="background-color: transparent;" (click)="GotoPage('OMM')">
+          <img src="assets/imgs/logo/omm.png">
+        </button>
+      </ion-col>
+      <ion-col text-center col-6 style="text-align: center;">
+        <button clear item-center style="background-color: transparent;" (click)="GotoPage('LOGBOOK')">
+          <img src="assets/imgs/logo/logbook.png">
+        </button>
+      </ion-col>
+      <ion-col text-center col-6 style="text-align: center;">
+        <button clear item-center style="background-color: transparent;" (click)="GotoPage('ASSESSMENT')">
+          <img src="assets/imgs/logo/assessment.png">
+        </button>
+      </ion-col>
+      <ion-col text-center col-6 style="text-align: center;">
+        <button clear item-center style="background-color: transparent;" (click)="CallQRScaner()">
+          <img src="assets/imgs/logo/QR.png">
+        </button>
+      </ion-col>
+      <ion-col text-center col-6 style="text-align: center;">
+        <button clear item-center style="background-color: transparent;" (click)="GotoPage('HOME')">
+          <img src="assets/imgs/logo/swu.png">
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

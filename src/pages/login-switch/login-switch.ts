@@ -16,6 +16,7 @@ import { UserAccount } from '../../models/UserAccount';
 import { LockscreenPage } from '../lockscreen/lockscreen';
 import { LoginPage } from '../login/login';
 import { ConfirmpinPage } from '../confirmpin/confirmpin';
+import { MenuPage } from '../menu/menu';
 
 @Component({
   selector: 'page-login-switch',
@@ -102,8 +103,25 @@ export class LoginSwitchPage {
     this.iTouchID.isAvailable()
       .then(
         res => {
-          console.log('TouchID is available!')
-          this.presentToastCtrl('TouchID is available!', 4000, 'top');
+          // console.log('TouchID is available!')
+          // this.presentToastCtrl('TouchID is available!', 4000, 'top'); 
+          this.iTouchID.verifyFingerprint('Scan your TouchID ')
+            .then(
+              res => {
+                // console.log('Ok', res);
+                // this.presentToast('OK:' + res);
+                this.navCtrl.push(MenuPage);
+              },
+              err => {
+                console.error('Error:', err);
+                this.presentToast('Error:' + err);
+              }
+            )
+            .catch((error: any) => {
+              this.presentToast(error);
+              console.log('err: ', error);
+            });
+
         },
         err => {
           console.error('TouchID is not available', err)
@@ -115,21 +133,6 @@ export class LoginSwitchPage {
         console.log('err: ', error);
       });
 
-    this.iTouchID.verifyFingerprint('Scan your fingerprint please')
-      .then(
-        res => {
-          console.log('Ok', res);
-          this.presentToast('OK:' + res);
-        },
-        err => {
-          console.error('Error:', err);
-          this.presentToast('Error:' + err);
-        }
-      )
-      .catch((error: any) => {
-        this.presentToast(error);
-        console.log('err: ', error);
-      });
   }
   ShowFingerPrint() {
     this.faio.isAvailable().then((isVal: boolean) => {
