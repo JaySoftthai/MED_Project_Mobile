@@ -65,42 +65,48 @@ export class MenuPage {
     (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
   }
   CallQRScaner() {
-    // this.showCamera();
+    // this.showCamera();  
+
+    this.qr_Scanner.prepare().then((status: QRScannerStatus) => {
+      this.presentToastCtrl(status.authorized, 6000, 'buttom');
+    }).catch((e: any) => {
+      this.presentToastCtrl('Error is:' + e, 6000, 'buttom');
+      console.log('Error is ', e)
+    });
 
 
 
+    // // Optionally request the permission early
 
-    // Optionally request the permission early
-
-    this.qr_Scanner.prepare()
-      .then((status: QRScannerStatus) => {
-        this.presentToastCtrl(status.authorized, 6000, 'buttom');
-        if (status.authorized) {
-          // camera permission was granted
+    // this.qr_Scanner.prepare()
+    //   .then((status: QRScannerStatus) => {
+    //     this.presentToastCtrl(status.authorized, 6000, 'buttom');
+    //     if (status.authorized) {
+    //       // camera permission was granted
 
 
-          // start scanning
-          let scanSub = this.qr_Scanner.scan().subscribe((text: string) => {
-            console.log('Scanned something', text);
-            this.presentToastCtrl(text, 6000, 'top');
+    //       // start scanning
+    //       let scanSub = this.qr_Scanner.scan().subscribe((text: string) => {
+    //         console.log('Scanned something', text);
+    //         this.presentToastCtrl(text, 6000, 'top');
 
-            this.QR_DATA = text;
-            this.qr_Scanner.hide(); // hide camera preview
-            scanSub.unsubscribe(); // stop scanning
-          });
+    //         this.QR_DATA = text;
+    //         this.qr_Scanner.hide(); // hide camera preview
+    //         scanSub.unsubscribe(); // stop scanning
+    //       });
 
-        } else if (status.denied) {
-          // camera permission was permanently denied
-          // you must use QRScanner.openSettings() method to guide the user to the settings page
-          // then they can grant the permission from there
-        } else {
-          // permission was denied, but not permanently. You can ask for permission again at a later time.
-        }
-      })
-      .catch((e: any) => {
-        this.presentToastCtrl('Error is:' + e, 6000, 'buttom');
-        console.log('Error is ', e)
-      });
+    //     } else if (status.denied) {
+    //       // camera permission was permanently denied
+    //       // you must use QRScanner.openSettings() method to guide the user to the settings page
+    //       // then they can grant the permission from there
+    //     } else {
+    //       // permission was denied, but not permanently. You can ask for permission again at a later time.
+    //     }
+    //   })
+    //   .catch((e: any) => {
+    //     this.presentToastCtrl('Error is:' + e, 6000, 'buttom');
+    //     console.log('Error is ', e)
+    //   });
 
   }
 
