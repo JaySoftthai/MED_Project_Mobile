@@ -70,7 +70,7 @@ export class MenuPage {
 
 
 
-    Optionally request the permission early
+    // Optionally request the permission early
 
     this.qr_Scanner.prepare()
       .then((status: QRScannerStatus) => {
