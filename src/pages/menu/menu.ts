@@ -7,6 +7,7 @@ import { MeetingListPage } from '../meeting-list/meeting-list';
 import { FingerPrintPage } from '../finger-print/finger-print';
 import { HomePage } from '../home/home';
 import { MyprofilePage } from '../myprofile/myprofile';
+import { TabsPage } from '../tabs/tabs';
 
 
 @Component({
@@ -28,10 +29,10 @@ export class MenuPage {
   GotoPage(mode) {
     switch (mode) {
       case "SCHEDULE":
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.push(TabsPage);
         break;
       case "OMM":
-        this.navCtrl.setRoot(MeetingListPage);
+        this.navCtrl.push(MeetingListPage);
         break;
       case "HOME":
         this.navCtrl.push(MyprofilePage);
@@ -58,6 +59,7 @@ export class MenuPage {
   }
   CallQRScaner() {
     // Optionally request the permission early
+
     this.qr_Scanner.prepare()
       .then((status: QRScannerStatus) => {
 
@@ -85,8 +87,8 @@ export class MenuPage {
         }
       })
       .catch((e: any) => {
-        this.presentToastCtrl('Error is' + e, 6000, 'buttom');
-        console.log('Error is', e)
+        this.presentToastCtrl('Error is:' + e, 6000, 'buttom');
+        console.log('Error is ', e)
       });
 
   }
