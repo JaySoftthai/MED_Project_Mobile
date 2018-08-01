@@ -67,12 +67,16 @@ export class MenuPage {
   CallQRScaner() {
     // this.showCamera();  
 
-    this.qr_Scanner.prepare().then((status: QRScannerStatus) => {
-      this.presentToastCtrl(status.authorized, 6000, 'buttom');
-    }).catch((e: any) => {
-      this.presentToastCtrl('Error is:' + e, 6000, 'buttom');
-      console.log('Error is ', e)
-    });
+    // this.qr_Scanner.getStatus(function (status) {
+    // if (!status.authorized && status.canOpenSettings) {
+
+    // if (confirm("Would you like to enable QR code scanning? You can allow camera access in your settings.")) {
+    //   this.qr_Scanner.openSettings();
+    // }
+    // }
+    // });
+    this.qr_Scanner.openSettings();
+    // this.presentToastCtrl(this.qr_Scanner.getStatus(), 6000, 'buttom');
 
 
 
