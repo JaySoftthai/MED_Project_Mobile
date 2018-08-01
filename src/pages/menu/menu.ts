@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { Platform } from 'ionic-angular';
 //Import Pages
 import { MeetingListPage } from '../meeting-list/meeting-list';
 import { FingerPrintPage } from '../finger-print/finger-print';
@@ -20,6 +21,7 @@ export class MenuPage {
     , public toast: ToastController
     , public popup: AlertController
     , public loading: LoadingController
+    , public platform: Platform
     , private qr_Scanner: QRScanner) {
   }
 
@@ -65,18 +67,16 @@ export class MenuPage {
     (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
   }
   CallQRScaner() {
-    // this.showCamera();  
+    // this.showCamera();
+    let scanSub = this.qr_Scanner.scan().subscribe((text: string) => {
+      console.log('Scanned something', text);
+      this.presentToastCtrl(text, 6000, 'top');
 
-    // this.qr_Scanner.getStatus(function (status) {
-    // if (!status.authorized && status.canOpenSettings) {
-
-    // if (confirm("Would you like to enable QR code scanning? You can allow camera access in your settings.")) {
-    //   this.qr_Scanner.openSettings();
-    // }
-    // }
-    // });
-    this.qr_Scanner.openSettings();
-    // this.presentToastCtrl(this.qr_Scanner.getStatus(), 6000, 'buttom');
+      this.QR_DATA = text;
+      this.qr_Scanner.hide(); // hide camera preview
+      scanSub.unsubscribe(); // stop scanning
+    });
+    // this.qr_Scanner.openSettings();
 
 
 
