@@ -87,7 +87,8 @@
         "FACEID_USAGE_DESCRIPTION": " "
       },
       "cordova-plugin-camera": {},
-      "cordova-plugin-qrscanner": {}
+      "cordova-plugin-qrscanner": {},
+      "cordova-plugin-add-swift-support": {}
     },
     "platforms": [
       "ios",

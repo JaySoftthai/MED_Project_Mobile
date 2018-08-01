@@ -97,4 +97,5 @@
     </plugin>
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-plugin-qrscanner" spec="^2.6.0" />
+    <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
 </widget>
