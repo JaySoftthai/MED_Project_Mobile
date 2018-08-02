@@ -67,7 +67,10 @@ export class MenuPage {
     (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
   }
   CallQRScaner() {
-    this.presentToastCtrl('CallQRScaner', 6000, 'top')
+    this.qr_Scanner.show().then((stat: QRScannerStatus) => {
+      this.presentToastCtrl(stat.authorized, 6000, 'top');
+    });
+
     // this.showCamera();
     let scanSub = this.qr_Scanner.scan().subscribe((text: string) => {
       console.log('Scanned something', text);
