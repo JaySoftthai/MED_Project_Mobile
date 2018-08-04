@@ -146,7 +146,7 @@ export class UserloginProvider {
     return new Promise((resolve, reject) => {
       this.storage.ready().then(() => {
         console.log(this.storage.get("IsLogined"))
-        this.storage.get("IsLogined").then((value: boolean) => resolve(value != undefined && value != null), (reason) => reject(false));
+        this.storage.get("IsLogined").then((value: boolean) => resolve(value != undefined && value != null && value == true), (reason) => reject(false));
       });
     });
   }

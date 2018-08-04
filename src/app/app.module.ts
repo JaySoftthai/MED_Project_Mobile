@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser'
 import {
   IonicApp, IonicModule, IonicErrorHandler
   , ItemSliding
@@ -100,6 +101,7 @@ import { OmmMeetingListProvider } from '../providers/omm-meeting-list/omm-meetin
     , TouchID
     , QRScanner
     , Camera
+    , InAppBrowser
   ]
 })
 export class AppModule { }

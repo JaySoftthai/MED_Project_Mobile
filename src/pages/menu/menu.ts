@@ -1,8 +1,16 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, LoadingController, AlertController } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Camera } from '@ionic-native/camera';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { Platform } from 'ionic-angular';
+
+///providers
+import { ApiProvider } from '../../providers/api/api';
+import { UserloginProvider } from '../../providers/userlogin/userlogin';
+//models
+import { UserAccount } from '../../models/UserAccount';
+
 //Import Pages
 import { MeetingListPage } from '../meeting-list/meeting-list';
 import { FingerPrintPage } from '../finger-print/finger-print';
@@ -17,16 +25,32 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class MenuPage {
   QR_DATA: string;
+  UserAccountData: UserAccount;
+  isLogin: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams
     , public toast: ToastController
     , public popup: AlertController
     , public loading: LoadingController
     , public platform: Platform
-    , private qr_Scanner: QRScanner) {
+    , public api: ApiProvider
+    , public usrProvider: UserloginProvider
+    , private qr_Scanner: QRScanner
+    , private iBrowser: InAppBrowser
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MenuPage');
+    this.usrProvider.isLogged().then((val: boolean) => {
+      this.isLogin = val;
+
+      if (this.isLogin) {
+        this.usrProvider.getUserAccountFromLocalStorage().then((usr: UserAccount) => {
+          this.UserAccountData = usr;
+        });
+
+      }
+    });
   }
   GotoPage(mode) {
     switch (mode) {
@@ -41,9 +65,13 @@ export class MenuPage {
         break;
       case "LOGBOOK":
         //web softthai
+        ///LogBook_Bypass.aspx?str=sUserCode&L 
+        this.openUrl(this.api.getLOG_Url() + 'LogBook_Bypass.aspx?str=' + this.UserAccountData.sUserID + '_L', '_blank');
         // this.navCtrl.push(MeetingListPage);
         break;
       case "ASSESSMENT":
+        ///LogBook_Bypass.aspx?str=sUserCode&A
+        this.openUrl(this.api.getASS_Url() + 'LogBook_Bypass.aspx?str=' + this.UserAccountData.sUserID + '_A', '_blank');
         // this.navCtrl.push(MeetingListPage);
         break;
       case "QR":
@@ -53,6 +81,14 @@ export class MenuPage {
       default:
         break;
     }
+  }
+  openUrl(_url, _target) {
+
+    this.platform.ready().then(() => {
+      let browser = new InAppBrowser();
+      browser.create(_url, _target, 'clearsessioncache=yes,clearcache=yes');
+
+    });
   }
   GotoFingerPrintPage() {
 

@@ -65,15 +65,18 @@ export class LoginPage {
       this.isLogin = res;
       console.log('page-login isLogin:' + this.isLogin);
       if (this.isLogin) {
+        this.usrProvider.isLogged().then((val: boolean) => {
+          // this.isLogin = val;
+          console.log('isLogin check localstronge')
+          console.log(val);
 
-        // this.usrProvider.isLogged().then((val: boolean) => {
-        //   this.isLogin = val;
+          if (val) {
 
-        //   if (this.isLogin) { }
-        // });
-        this.storage.set("IsLogined", true);
-        this.navCtrl.setRoot(LoginSwitchPage);//this.navCtrl.setRoot(LockscreenPage);
-        return false;
+            this.storage.set("IsLogined", true);
+            this.navCtrl.setRoot(LoginSwitchPage);//this.navCtrl.setRoot(LockscreenPage);
+            return false;
+          } else { return false; }
+        });
       }
       else { return false; }
     });

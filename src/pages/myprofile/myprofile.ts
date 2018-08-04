@@ -74,7 +74,10 @@ export class MyprofilePage {
 
   }
   Logout() {
-    this.storage.set('IsLogined', false);
+    this.storage.set('IsLogined', false).then(promt => {
+      this.navCtrl.setRoot(LoginPage);
+    });
+
   }
 
 }

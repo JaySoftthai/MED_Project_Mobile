@@ -13,11 +13,23 @@ import 'rxjs/add/operator/toPromise'
 @Injectable()
 export class ApiProvider {
   apiUrl: string;
+  OMM_Url: string;
+  LOG_Url: string;
+  ASS_Url: string;
+  AMS_Url: string;
   constructor(public http: Http) {
     this.apiUrl = "http://www.softthai.com/Med_ams/Mobile/Ashx/";
+    this.AMS_Url = "http://www.softthai.com/Med_ams/";
+    this.OMM_Url = "http://www.softthai.com/Med_ams/";
+    this.LOG_Url = "http://www.softthai.com/Med_ams/";
+    this.ASS_Url = "http://www.softthai.com/Med_ams/";
   }
   //get api url
   getApiUrl(): string { return this.apiUrl; }
+  getAMS_Url(): string { return this.AMS_Url; }
+  getOMM_Url(): string { return this.OMM_Url; }
+  getLOG_Url(): string { return this.LOG_Url; }
+  getASS_Url(): string { return this.ASS_Url; }
 
   //method handleError เป็น method สำหรับดักจับข้อผิดพลาดที่ส่งมาจาก Backend
   // error.json().errorMessage คำสั่ง .errorMessage เป็น name ของ json ในส่วนของ Backend ขึ้นกับว่าตั้งอะไรไว้
