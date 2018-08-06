@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, ItemSliding } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content, ActionSheetController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 ////import models
 import { MeettingData } from '../../models/MeettingData';
+import { UserAccount } from '../../models/UserAccount';
 ////import providers
 import { OmmMeetingListProvider } from '../../providers/omm-meeting-list/omm-meeting-list';
-
-
-
+import { MeetingDetailPage } from '../meeting-detail/meeting-detail';
+import { UserloginProvider } from '../../providers/userlogin/userlogin';
 @Component({
   selector: 'page-meeting-list',
   templateUrl: 'meeting-list.html',
@@ -26,18 +26,31 @@ export class MeetingListPage {
   sSearch_Status: string;
   sUserID: string;
   errorMessage: string;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public slidingItem: ItemSliding
-    , private MeetingProv: OmmMeetingListProvider
+  sUsername: string;
+  sPersonnel_ID: string;
+  constructor(public navCtrl: NavController, public navParams: NavParams
+    , private MeetingProv: OmmMeetingListProvider, public actionSheetCtrl: ActionSheetController
+    , public _PV_UserAcc: UserloginProvider
   ) { }
   ionViewDidLoad() {
     console.log('meetingpage ionViewDidLoad')
-    this.BindMeeting();
+    this._PV_UserAcc.getUserNameFromStorage().then((res: string) => {
+      if (res != null && res != undefined && res != "") {
+        this.sUsername = res;
+        this._PV_UserAcc.getUserInfoByUserName(this.sUsername).then((res2: UserAccount) => {
+          this.sPersonnel_ID = res2.sUserCode;
+          console.log("USERCODE" + this.sPersonnel_ID);
+          this.BindMeeting();
+        });
+      }
+    });
+
   }
   BindMeeting(isScroll?: boolean) {
     // let _UserID = (this.usrdata == null) ? '' : this.usrdata.userid;
     // let _RoleID = (this.usrdata == null) ? '' : this.usrdata.role;
-    this.sub = this.MeetingProv.getData_Metting('meetting_list', this.sKeyword, [this.sSearch_ReqDate, this.sSearch_CounterService, this.sSearch_TrackingNumber, this.sSearch_Status], this.nStart, this.nTop).subscribe(
+    console.log("BindMeeting : " + this.sPersonnel_ID);
+    this.sub = this.MeetingProv.getData_Metting('meetting_list', this.sKeyword, this.sPersonnel_ID, [this.sSearch_ReqDate, this.sSearch_CounterService, this.sSearch_TrackingNumber, this.sSearch_Status], this.nStart, this.nTop).subscribe(
       (res) => {
 
         if (isScroll && this.lstMeeting.length > 0)
@@ -45,7 +58,7 @@ export class MeetingListPage {
         else
           this.lstMeeting = res;
 
-        console.log(this.lstMeeting)
+        //console.log(this.lstMeeting)
         this.nStart = this.lstMeeting.length;
         this.nTotalRows = this.lstMeeting.length;
       },
@@ -67,13 +80,7 @@ export class MeetingListPage {
     });
   }
 
-  Accept(slidingItem: ItemSliding) {
-    slidingItem.close();
-  }
-  Decline(slidingItem: ItemSliding) {
-    slidingItem.close();
-  }
-  share(slidingItem: ItemSliding) {
-    slidingItem.close();
+  openNavDetailsPage(sTitle, item) {
+    this.navCtrl.push(MeetingDetailPage, { sTitle: sTitle, DataDetail: item });
   }
 }

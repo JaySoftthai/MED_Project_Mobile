@@ -1,44 +1,17 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>Meetting</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-<ion-content padding>
+<ion-content>
   <ion-list>
-    <ion-list-header>
-      <p text-wrap></p>
-    </ion-list-header>
-    <ion-item-sliding #item>
-      <ion-item>
-        <p>xxxxx</p>
-        <small text-wrap>xxxxxx</small>
-      </ion-item>
-      <ion-item-options side="right">
-        <button ion-button (click)="Accept(item)">Accept</button>
-        <button ion-button color="danger" (click)="Decline(item)">Decline</button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-  <!--<ion-list *ngFor="let c of lstMeeting">
-    <ion-list-header>
-      <p text-wrap>{{c.sMeetingName}}</p>
-    </ion-list-header>
-    <ion-item-sliding #item>
-      <ion-item>
-        <p>{{c.sMeetingDetailName}}</p>
-        <small text-wrap>{{c.dMeeting}} {{c.tStart}} - {{c.tEnd}}</small>
-      </ion-item>
-      <ion-item-options side="right">
-        <button ion-button (click)="Accept(item)">Accept</button>
-        <button ion-button color="danger" (click)="Decline(item)">Decline</button>
-      </ion-item-options>
-    </ion-item-sliding>
+    <button ion-item *ngFor="let item of lstMeeting" (click)="openNavDetailsPage(item.sMeetingName,item.lst_Round)">
+      <ion-icon [name]="'ios-chatboxes'" item-start></ion-icon>
+      <p text-wrap>{{item.sMeetingName}}</p>
+    </button>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
+  </ion-infinite-scroll>
 </ion-content>

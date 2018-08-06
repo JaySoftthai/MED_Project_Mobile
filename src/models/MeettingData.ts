@@ -19,3 +19,10 @@ export class MeettingData {
     ) { }
 
 }
+
+export class Person_Meeting {
+    constructor(
+        public Personnel_ID, public Name
+    ) { }
+
+}

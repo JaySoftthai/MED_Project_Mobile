@@ -129,6 +129,16 @@ page-meeting-list {
             order: 1;
         }
     }
+    ion-list {
+        button {
+            div.item-inner {
+                border-bottom: 0px !important;
+            }
+            div.input-wrapper {
+                border-bottom: 0px !important;
+            }
+        }
+    }
     .item {
         // background-color: #fff;
         // color: #444; // position: relative;
