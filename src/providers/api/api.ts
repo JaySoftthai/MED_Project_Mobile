@@ -18,11 +18,18 @@ export class ApiProvider {
   ASS_Url: string;
   AMS_Url: string;
   constructor(public http: Http) {
-    this.apiUrl = "http://www.softthai.com/Med_ams/Mobile/Ashx/";
-    this.AMS_Url = "http://www.softthai.com/Med_ams/";
-    this.OMM_Url = "http://www.softthai.com/Med_ams/";
-    this.LOG_Url = "http://www.softthai.com/Med_ams/";
-    this.ASS_Url = "http://www.softthai.com/Med_ams/";
+    // this.apiUrl = "http://www.softthai.com/Med_ams/Mobile/Ashx/";
+    // this.AMS_Url = "http://www.softthai.com/Med_ams/";
+    // this.OMM_Url = "http://www.softthai.com/Med_ams/";
+    // this.LOG_Url = "http://www.softthai.com/Med_ams/";
+    // this.ASS_Url = "http://www.softthai.com/Med_ams/";
+
+
+    this.apiUrl = "http://www.med-swu.com/ams/Mobile/Ashx/";
+    this.AMS_Url = "http://www.med-swu.com/ams/";
+    this.OMM_Url = "http://www.med-swu.com/ams/";
+    this.LOG_Url = "http://www.med-swu.com/ams/";
+    this.ASS_Url = "http://www.med-swu.com/ams/";
   }
   //get api url
   getApiUrl(): string { return this.apiUrl; }

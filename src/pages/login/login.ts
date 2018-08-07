@@ -116,7 +116,7 @@ export class LoginPage {
           this.presentToast("No response.");
         }
       }).catch(error => {
-        this.presentToast("Login error.");
+        this.presentToast("Login error." + "=>" + error);
       });
     }
     else {
