@@ -121,9 +121,9 @@ export class MenuPage {
     }).then(barcodeData => {
 
       this.QR_DATA = barcodeData.text;
-      if (barcodeData.text != "") { 
+      if (barcodeData.text != "") {
 
-        
+
       }
     });
   }

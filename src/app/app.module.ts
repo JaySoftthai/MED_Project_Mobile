@@ -24,6 +24,7 @@ import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 import { TouchID } from '@ionic-native/touch-id';
 import { Camera } from '@ionic-native/camera';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 //Page
 import { HomePage } from '../pages/home/home';
@@ -102,6 +103,7 @@ import { OmmMeetingListProvider } from '../providers/omm-meeting-list/omm-meetin
     , QRScanner
     , Camera
     , InAppBrowser
+    , BarcodeScanner
   ]
 })
 export class AppModule { }
