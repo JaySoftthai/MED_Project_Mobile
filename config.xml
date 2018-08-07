@@ -1,8 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="eFac.MED.SWU" version="0.0.1" 
+    xmlns="http://www.w3.org/ns/widgets" 
+    xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>AMS(S)</name>
     <description>MED AMS for Student</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Softthai Team</author>
+    <author email="hi@softthai" href="http://softthai.com/">Softthai Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
