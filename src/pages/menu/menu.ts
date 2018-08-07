@@ -124,6 +124,7 @@ export class MenuPage {
       if (barcodeData.text != "") {
 
 
+        this.presentToastCtrl(this.QR_DATA, 6000, 'buttom');
       }
     });
   }
