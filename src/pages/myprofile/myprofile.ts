@@ -10,6 +10,7 @@ import { CommonProvider } from '../../providers/common/common';
 import { ApiProvider } from '../../providers/api/api';
 import { UserloginProvider } from '../../providers/userlogin/userlogin';
 import { LockscreenPage } from '../lockscreen/lockscreen';
+import { SetpinPage } from '../setpin/setpin';
 @Component({
   selector: 'page-myprofile',
   templateUrl: 'myprofile.html',
@@ -75,7 +76,7 @@ export class MyprofilePage {
 
   }
   ChangePIN() {
-    this.navCtrl.setRoot(LockscreenPage);
+    this.navCtrl.setRoot(SetpinPage);
   }
   Logout() {
     this.storage.set('IsLogined', false).then(promt => {
