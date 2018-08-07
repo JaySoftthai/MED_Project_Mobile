@@ -4,6 +4,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Camera } from '@ionic-native/camera';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { Platform } from 'ionic-angular';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 ///providers
 import { ApiProvider } from '../../providers/api/api';
@@ -36,6 +37,7 @@ export class MenuPage {
     , public usrProvider: UserloginProvider
     , private qr_Scanner: QRScanner
     , private iBrowser: InAppBrowser
+    , private barcodeScanner: BarcodeScanner
   ) {
   }
 
@@ -101,6 +103,29 @@ export class MenuPage {
 
   hideCamera() {
     (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
+  }
+
+  CallScaner() {
+
+
+    this.barcodeScanner.scan({
+      preferFrontCamera: false
+      , showFlipCameraButton: false
+      , showTorchButton: false
+      , torchOn: false
+      , disableAnimations: false
+      , disableSuccessBeep: false
+      // , prompt: "Do you want to next?"
+      // , orientation: "portrait" 1000
+      , resultDisplayDuration: 0
+    }).then(barcodeData => {
+
+      this.QR_DATA = barcodeData.text;
+      if (barcodeData.text != "") { 
+
+        
+      }
+    });
   }
   CallQRScaner() {
     this.qr_Scanner.show().then((stat: QRScannerStatus) => {
