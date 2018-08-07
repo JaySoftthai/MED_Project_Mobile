@@ -123,8 +123,12 @@ export class MenuPage {
       this.QR_DATA = barcodeData.text;
       if (barcodeData.text != "") {
 
+        if (this.QR_DATA.startsWith("http://") || this.QR_DATA.startsWith("https://")) {
 
-        this.presentToastCtrl(this.QR_DATA, 6000, 'buttom');
+          this.openUrl(barcodeData.text, '_blank');
+        } else {
+          this.presentToastCtrl('QR Code Content is not protocol:' + this.QR_DATA, 6000, 'buttom');
+        }
       }
     });
   }
