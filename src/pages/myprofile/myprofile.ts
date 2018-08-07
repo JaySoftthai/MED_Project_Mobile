@@ -9,6 +9,7 @@ import { UserAccount } from '../../models/UserAccount';
 import { CommonProvider } from '../../providers/common/common';
 import { ApiProvider } from '../../providers/api/api';
 import { UserloginProvider } from '../../providers/userlogin/userlogin';
+import { LockscreenPage } from '../lockscreen/lockscreen';
 @Component({
   selector: 'page-myprofile',
   templateUrl: 'myprofile.html',
@@ -72,6 +73,9 @@ export class MyprofilePage {
   }
   SetData() {
 
+  }
+  ChangePIN() {
+    this.navCtrl.setRoot(LockscreenPage);
   }
   Logout() {
     this.storage.set('IsLogined', false).then(promt => {
